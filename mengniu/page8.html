@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="../JQuery/jquery-3.2.0.min.js"></script>
+    <title>page8</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden
+        }
+
+        .page8 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgb(249,194,50);
+        }
+
+        .page8_content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .page8_img1 {
+            width: 100%;
+            height: 380px;
+            background: url("page8_pic1.png") 0 10px no-repeat;
+            position: absolute;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page8_img2 {
+            width: 250px;
+            height: 140px;
+            background: url("page8_pic2.png") 10px -1px no-repeat;
+            position: absolute;
+            left: 62px;
+            top: 108px;
+            background-size: 226px;
+            opacity: 0;
+        }
+
+        /*淡入放大*/
+        .page8_img_running_scale{
+            animation: page8_img_running_scale 0.7s cubic-bezier(0, 1.13, 0.85, 1.27);
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page8_img_running_scale {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .page8_img3 {
+            width: 250px;
+            height: 140px;
+            background: url("page8_pic3.png") 3px -2px no-repeat;
+            position: absolute;
+            left: 66px;
+            top: 248px;
+            background-size: 210px;
+            transform: rotate(-6deg);
+            opacity: 0;
+        }
+
+        .page8_img4 {
+            width: 260px;
+            height: 140px;
+            background: url("page8_pic4.png") 3px -2px no-repeat;
+            position: absolute;
+            left: 68px;
+            top: 352px;
+            background-size: 256px;
+            transform: rotate(-6deg);
+            opacity: 0;
+        }
+
+        /*从底部滑入*/
+        .page8_img_running_bottom{
+            animation: page8_img_running_bottom 1s cubic-bezier(0, 1.13, 0.85, 1.27);
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page8_img_running_bottom {
+            from {
+                opacity: 0;
+                transform: translate(0,50px)  rotate(-6deg);
+            }
+            to {
+                opacity: 1;
+                transform: translate(0,0)  rotate(-6deg);
+            }
+        }
+
+        .page8_img5 {
+            width: 260px;
+            height: 140px;
+            background: url("page8_pic5.png") 3px -2px no-repeat;
+            position: absolute;
+            left: 245px;
+            top: 363px;
+            background-size: 32px;
+            transform: rotate(-6deg);
+            opacity: 0;
+        }
+
+        /*晃入*/
+        .page8_img5_running_tada{
+            animation: tada 1s cubic-bezier(0, 1.13, 0.85, 1.27);
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+        @keyframes tada {
+            from {
+                opacity: 0;
+                transform: scale3d(1, 1, 1);
+            }
+
+            10%, 20% {
+                transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+            }
+
+            30%, 50%, 70%, 90% {
+                transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+            }
+
+            40%, 60%, 80% {
+                transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale3d(1, 1, 1);
+            }
+        }
+
+        .page8_img6 {
+            width: 100%;
+            height: 180px;
+            background: url("page8_pic6.png") 3px -2px no-repeat;
+            position: absolute;
+            bottom: 0;
+            background-size: cover;
+            opacity: 0;
+        }
+
+        /*从底部滑入*/
+        .page8_img6_running_bottom{
+            animation: page8_img6_running_bottom 1s ease;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page8_img6_running_bottom {
+            from {
+                opacity: 0;
+                transform: translate(0,50px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(0,0);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page8">
+    <div class="page8_content">
+        <div class="page8_img1"></div>
+        <div class="page8_img2"></div>
+        <div class="page8_img3"></div>
+        <div class="page8_img4"></div>
+        <div class="page8_img5"></div>
+        <div class="page8_img6"></div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var t;
+        t = setTimeout(img1_move,500);
+        function img1_move() {
+            clearTimeout(t);
+            $(".page8_img1").addClass("page8_img_running_scale").css("opacity",1);
+            t = setInterval(img2_move,300)
+        }
+
+        function img2_move() {
+            clearInterval(t);
+            $(".page8_img2").addClass("page8_img_running_scale").css("opacity",1);
+            t = setInterval(img3_move,300)
+        }
+
+        function img3_move() {
+            clearInterval(t);
+            $(".page8_img3").addClass("page8_img_running_bottom").css("opacity",1);
+            t = setInterval(img4_move,300)
+        }
+
+        function img4_move() {
+            clearInterval(t);
+            $(".page8_img4").addClass("page8_img_running_bottom").css("opacity",1);
+            t = setInterval(img5_move,300)
+        }
+
+        function img5_move() {
+            clearInterval(t);
+            $(".page8_img5").addClass("page8_img5_running_tada").css("opacity",1);
+            t = setInterval(img6_move,800)
+        }
+
+        function img6_move() {
+            clearInterval(t);
+            $(".page8_img6").addClass("page8_img6_running_bottom").css("opacity",1);
+        }
+
+    })
+</script>
+</body>
+</html>

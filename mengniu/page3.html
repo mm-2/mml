@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="../JQuery/jquery-3.2.0.min.js"></script>
+    <title>page3</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden
+        }
+
+        .page3 {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: rgb(246,184,13);
+        }
+
+        .page3_content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .page3_img1 {
+            position: absolute;
+            left: 47px;
+            top: 89px;
+            width: 200px;
+            height: 55px;
+            background: url(page3_pic1.png) -48px -74px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page3_img2 {
+            position: absolute;
+            left: 47px;
+            top: 144px;
+            width: 300px;
+            height: 70px;
+            background: url(page3_pic1.png) -48px -124px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page3_img3 {
+            position: absolute;
+            left: 47px;
+            top: 214px;
+            width: 300px;
+            height: 60px;
+            background: url(page3_pic1.png) -48px -195px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page3_img4 {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 325px;
+            background: url(page3_pic1.png) 0 -262px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page3_img5 {
+            position: absolute;
+            left: 47px;
+            top: 144px;
+            width: 300px;
+            height: 70px;
+            background: url(page3_pic2.png) -20px 2px no-repeat;
+            background-size: 180px;
+            opacity: 0;
+        }
+
+        /*从右侧滑入*/
+        .running_right {
+            animation: page3_img_right 0.7s linear;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page3_img_right {
+            from {
+                opacity: 0;
+                transform: translate(300px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate(0px, 0)
+            }
+        }
+
+        /*从左侧滑出*/
+        .running_left {
+            animation: page3_img_left 0.7s linear;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page3_img_left {
+            from {
+                opacity: 1;
+                transform: translate(0, 0);
+            }
+            to {
+                opacity: 0;
+                transform: translate(-300px, 0)
+            }
+        }
+
+        /*从底侧滑入*/
+        .running_bottom {
+            animation: page3_img_bottom 0.7s linear;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page3_img_bottom {
+            from {
+                opacity: 0;
+                transform: translate(0,325px);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(0,0);
+            }
+            70% {
+                transform: translate(0,50px);
+            }
+            to {
+                transform: translate(0, 0)
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page3">
+    <div class="page3_content">
+        <div class="page3_img1"></div>
+        <div class="page3_img2"></div>
+        <div class="page3_img3"></div>
+        <div class="page3_img4"></div>
+        <div class="page3_img5"></div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        var t, t1; //计时器
+        var $img_first = $(".page3_content>div:lt(3)"); //前3个图片
+        var $img_second = $(".page3_img4"); //第4个图片
+        var $img_third = $(".page3_img5"); //第5个图片
+
+        //前3个图片滑入动画队列
+        for (var i = 0; i < 3; i++) {
+            (function ($this, i) {
+                setTimeout(function () {
+                    $this.addClass("running_right");
+                    $this.css("opacity", 1)
+                }, i * 700)
+            })($img_first.eq(i), i);
+        }
+
+        //通过计时器检测第3张图片的透明度
+        t = setInterval(function () {
+            if($img_first.eq(2).css("opacity") / 1 == 1){
+                clearInterval(t); //清除t
+                //第4张图片滑入
+                $img_second.addClass("running_bottom").css("opacity",1);
+                //设置定时器t1
+                t1 = setInterval(img5_move,1000)
+            }
+        },1000);
+
+        function img5_move() {
+            if($img_second.css("opacity") / 1 == 1){
+                clearInterval(t1);
+                $img_first.eq(1).animate({opacity:0},700);
+                $img_first.eq(2).animate({opacity:0},700);
+                $img_third.addClass("running_bottom").css("opacity",1);
+            }
+        }
+    })
+</script>
+</body>
+</html>

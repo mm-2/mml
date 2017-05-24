@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="../JQuery/jquery-3.2.0.min.js"></script>
+    <title>page2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden
+        }
+
+        .page2 {
+            width: 100%;
+            height: 100%;
+            background: url("page2_bg.jpg") bottom center no-repeat;
+            background-size: cover;
+        }
+
+        .page2_content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: url("page2_content_bg.png") bottom center no-repeat;
+        }
+
+        .page2_img1 {
+            width: 250px;
+            height: 55px;
+            background: url("page2_pic1.png") -64px -41px;
+            position: absolute;
+            left: 50px;
+            top: 70px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page2_img2 {
+            width: 210px;
+            height: 55px;
+            background: url("page2_pic1.png") -56px -115px;
+            position: absolute;
+            left: 42px;
+            top: 125px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page2_img3 {
+            width: 210px;
+            height: 55px;
+            background: url("page2_pic1.png") -56px -189px;
+            position: absolute;
+            left: 42px;
+            top: 180px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page2_img4 {
+            width: 210px;
+            height: 75px;
+            background: url("page2_pic1.png") -61px -263px;
+            position: absolute;
+            left: 45px;
+            top: 235px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page2_img5 {
+            width: 250px;
+            height: 55px;
+            background: url("page2_pic2.png") -60px -82px;
+            position: absolute;
+            left: 50px;
+            top: 70px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page2_img6 {
+            width: 210px;
+            height: 55px;
+            background: url("page2_pic2.png") -53px -142px;
+            position: absolute;
+            left: 42px;
+            top: 125px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page2_img7 {
+            width: 230px;
+            height: 55px;
+            background: url("page2_pic2.png") -54px -200px;
+            position: absolute;
+            left: 42px;
+            top: 180px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page2_img8 {
+            width: 210px;
+            height: 75px;
+            background: url("page2_pic2.png") -59px -259px;
+            position: absolute;
+            left: 45px;
+            top: 235px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        /*从右侧滑入*/
+        .running_right {
+            animation: page2_img_right 0.7s linear;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page2_img_right {
+            from {
+                opacity: 0;
+                transform: translate(300px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate(0px, 0)
+            }
+        }
+
+        /*从左侧滑出*/
+        .running_left {
+            animation: page2_img_left 0.7s linear;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page2_img_left {
+            from {
+                opacity: 1;
+                transform: translate(0, 0);
+            }
+            to {
+                opacity: 0;
+                transform: translate(-300px, 0)
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page2">
+    <div class="page2_content">
+        <div class="page2_img1"></div>
+        <div class="page2_img2"></div>
+        <div class="page2_img3"></div>
+        <div class="page2_img4"></div>
+        <div class="page2_img5"></div>
+        <div class="page2_img6"></div>
+        <div class="page2_img7"></div>
+        <div class="page2_img8"></div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        var t, t1; //计时器
+        var $img_first = $(".page2_content>div:lt(4)"); //前4个图片
+        var $img_second = $(".page2_content>div:gt(3)"); //后4个图片
+
+        //前4个图片滑入动画队列
+        for (var i = 0; i < 4; i++) {
+            (function ($this, i) {
+                setTimeout(function () {
+                    $this.addClass("running_right");
+                    $this.css("opacity", 1)
+                }, i * 700)
+            })($img_first.eq(i), i);
+        }
+
+        //通过计时器检测第四张图片的透明度
+        t = setInterval(function () {
+            if ($img_first.eq(3).css("opacity") / 1 == 1) {
+                clearInterval(t); //清除t
+                t1 = setTimeout(function () {
+                    //前4张图片滑出
+                    $img_first.addClass("running_left").css("opacity", 0);
+                    //后4个图片滑入动画队列
+                    for (var j = 0; j < 4; j++) {
+                        (function ($this, j) {
+                            setTimeout(function () {
+                                $this.addClass("running_right");
+                                $this.css("opacity", 1)
+                            }, j * 700)
+                        })($img_second.eq(j), j);
+                    }
+                }, 2000);
+            }
+        }, 1000)
+
+    })
+</script>
+</body>
+</html>

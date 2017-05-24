@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="../JQuery/jquery-3.2.0.min.js"></script>
+    <title>page4</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden
+        }
+
+        .page4 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgb(255,181,132);
+        }
+
+        .page4_content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .page4_img1 {
+            position: absolute;
+            left: 47px;
+            top: 89px;
+            width: 200px;
+            height: 50px;
+            background: url(page4_pic1.png) -48px -186px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page4_img2 {
+            position: absolute;
+            left: 47px;
+            top: 139px;
+            width: 200px;
+            height: 25px;
+            background: url(page4_pic1.png) -48px -70px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page4_img3 {
+            position: absolute;
+            left: 47px;
+            top: 164px;
+            width: 220px;
+            height: 53px;
+            background: url(page4_pic1.png) -48px -238px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page4_img4 {
+            position: absolute;
+            left: 47px;
+            top: 217px;
+            width: 260px;
+            height: 86px;
+            background: url(page4_pic1.png) -46px -92px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        /*淡入放大*/
+        .page4_running_scale {
+            animation: page4_img_scale 0.7s linear;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page4_img_scale {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .page4_img5 {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 290px;
+            background: url(page4_pic2.png) -114px 4px no-repeat;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        /*飞入*/
+        .page4_running_fly {
+            animation: page4_img_fly 1s linear;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page4_img_fly {
+            from {
+                opacity: 0;
+                transform: translate(-100px,100px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(0,0);
+            }
+        }
+
+        /*飞入后晃动*/
+        .page4_running_fly_1 {
+            animation: page4_img_fly_1 1s linear;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        @keyframes page4_img_fly_1 {
+            from {
+                transform: translate(0,0);
+            }
+            to {
+                transform: translate(-15px,15px);
+            }
+        }
+
+        .page4_img6 {
+            position: absolute;
+            left: -88px;
+            top: 316px;
+            width: 164px;
+            height: 84px;
+            background: url(page4_pic3.png) 2px 1px no-repeat;
+            background-size: 160px;
+            animation: page4_img_cloud 1s linear;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        .page4_img7 {
+            position: absolute;
+            left: 328px;
+            top: 450px;
+            width: 164px;
+            height: 84px;
+            background: url(page4_pic3.png) 2px 1px no-repeat;
+            background-size: 160px;
+            animation: page4_img_cloud 1s linear;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        /*云朵飘*/
+        @keyframes page4_img_cloud {
+            from {
+                transform: translate(0,0);
+            }
+            to {
+                transform: translate(10px,0);
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="page4">
+    <div class="page4_content">
+        <div class="page4_img1"></div>
+        <div class="page4_img2"></div>
+        <div class="page4_img3"></div>
+        <div class="page4_img4"></div>
+        <div class="page4_img5"></div>
+        <div class="page4_img6"></div>
+        <div class="page4_img7"></div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var t;
+        var $img_first = $(".page4_content>div:lt(4)"); //前4个图片
+        //前4个图片滑入动画队列
+        for (var i = 0; i < 4; i++) {
+            (function ($this, i) {
+                setTimeout(function () {
+                    $this.addClass("page4_running_scale");
+                    $this.css("opacity", 1)
+                }, i * 700)
+            })($img_first.eq(i), i);
+        }
+
+        //通过计时器检测第3张图片的透明度
+        t = setInterval(function () {
+            if($img_first.eq(3).css("opacity") / 1 == 1){
+                clearInterval(t); //清除t
+                //第5张图片滑入
+                $(".page4_img5").addClass("page4_running_fly").css("opacity",1);
+                //设置定时器t1
+                t = setInterval(img5_move,1200)
+            }
+        },1000);
+
+        function img5_move() {
+            if($(".page4_img5").css("opacity")==1){
+                clearInterval(t);
+                $(".page4_img5").addClass("page4_running_fly_1")
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

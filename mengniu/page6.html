@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="../JQuery/jquery-3.2.0.min.js"></script>
+    <title>page6</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden
+        }
+
+        .page6 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgb(235,104,119);
+            overflow: hidden;
+        }
+
+        .page6_content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            /*background: url("page6_content_bg.png") -2px -40px no-repeat;*/
+            /*background-size: 480px;*/
+        }
+
+        .page6_img0 {
+            position: absolute;
+            top: 57px;
+            left: 30px;
+            width: 100%;
+            height: 100%;
+            background: url(page6_content_bg.png) 3px 3px no-repeat;
+            background-size: 372px;
+            transform: scale(1.2);
+        }
+
+        /*淡出缩放*/
+        .page6_img0_running_scale {
+            animation: page6_img0_running_scale 3s ease;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page6_img0_running_scale {
+            from {
+                transform: scale(1.2);
+            }
+            30%{
+                transform: scale(1.4);
+            }
+            60%{
+                transform: scale(1.3);
+            }
+            90%{
+                opacity: 1;
+                transform: scale(1.5);
+            }
+            95%{
+                opacity: 1;
+                transform: scale(2);
+            }
+            to {
+                opacity: 0;
+                transform: scale(10);
+            }
+        }
+
+        .page6_img1 {
+            position: absolute;
+            left: 47px;
+            top: 124px;
+            width: 204px;
+            height: 105px;
+            background: url(page6_pic1.png) -45px -96px no-repeat;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page6_img2 {
+            position: absolute;
+            left: 148px;
+            top: 240px;
+            width: 204px;
+            height: 105px;
+            background: url(page6_pic1.png) -122px -208px no-repeat;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        /*淡入放大*/
+        .page6_img1_running_scale {
+            animation: page6_img1_running_scale 1s ease;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page6_img1_running_scale {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+            90%{
+                opacity: 1;
+                transform: scale(1.1);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .page6_img3 {
+            position: absolute;
+            left: 0;
+            top: 402px;
+            width: 300px;
+            height: 300px;
+            background: url(page6_pic2.png) -85px 2px no-repeat;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        /*淡入缩小*/
+        .page6_img3_running_scale {
+            animation: page6_img3_running_scale 1s ease;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page6_img3_running_scale {
+            from {
+                opacity: 0;
+                transform: scale(1.3);
+            }
+            90% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page6">
+    <div class="page6_content">
+        <div class="page6_img0"></div>
+        <div class="page6_img1"></div>
+        <div class="page6_img2"></div>
+        <div class="page6_img3"></div>
+    </div>
+</div>
+<script>
+$(document).ready(function () {
+    var t;
+    var $img_first = $(".page6_content>div:lt(3):gt(0)");
+    //前2个图片滑入动画队列
+    for (var i = 0; i < 2; i++) {
+        (function ($this, i) {
+            setTimeout(function () {
+                $this.addClass("page6_img1_running_scale");
+                $this.css("opacity", 1)
+            }, i * 700)
+        })($img_first.eq(i), i);
+    }
+
+    //通过计时器检测第四张图片的透明度
+    t = setInterval(function () {
+        if ($(".page6_img2").css("opacity") / 1 == 1) {
+            clearInterval(t); //清除t
+            $(".page6_img0").addClass("page6_img0_running_scale");
+            t = setTimeout(function () {
+                $(".page6_img3").addClass("page6_img3_running_scale");
+                $(".page6_img0").css("opacity",0)
+            },1800)
+        }
+    }, 1000)
+})
+</script>
+</body>
+</html>

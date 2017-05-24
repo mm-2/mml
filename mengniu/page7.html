@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="../JQuery/jquery-3.2.0.min.js"></script>
+    <title>page7</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden
+        }
+
+        .page7 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url(page7_bg.jpg) bottom center no-repeat;
+            background-size: cover;
+        }
+
+        .page7_content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .page7_img1 {
+            position: absolute;
+            left: 77px;
+            top: 55px;
+            width: 220px;
+            height: 100px;
+            background: url(page7_pic1.png) -75px -32px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page7_img2 {
+            position: absolute;
+            left: 20px;
+            top: 150px;
+            width: 340px;
+            height: 245px;
+            background: url(page7_pic5.png) -23px -125px;
+            background-size: 375px;
+            transform: rotate(-17deg);
+            opacity: 0;
+        }
+
+        .page7_img3 {
+            position: absolute;
+            left: 20px;
+            top: 372px;
+            width: 340px;
+            height: 256px;
+            background: url(page7_pic6.png) -23px -125px;
+            background-size: 375px;
+            transform: rotate(4deg) scale(0.9);
+            opacity: 0;
+        }
+
+        .page7_img4 {
+            position: absolute;
+            left: 5px;
+            top: 184px;
+            width: 340px;
+            height: 245px;
+            background: url(page7_pic8.png) -60px -440px;
+            background-size: 444px;
+            transform: rotate(0deg) scale(1);
+            opacity: 0;
+        }
+
+        .page7_img5 {
+            position: absolute;
+            left: 20px;
+            top: 368px;
+            width: 340px;
+            height: 245px;
+            background: url(page7_pic8.png) -23px -125px;
+            background-size: 375px;
+            transform: rotate(0deg);
+            opacity: 0;
+        }
+
+        .page7_img6 {
+            position: absolute;
+            left: 77px;
+            top: 55px;
+            width: 220px;
+            height: 100px;
+            background: url(page7_pic2.png) -75px -32px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page7_img7 {
+            position: absolute;
+            left: 5px;
+            top: 136px;
+            width: 340px;
+            height: 245px;
+            background: url(page7_pic7.png) -1px -1px no-repeat;
+            background-size: cover;
+            transform: rotate(24deg) scale(0.9);
+            opacity: 0;
+        }
+
+        .page7_img8 {
+            position: absolute;
+            left: 34px;
+            top: 387px;
+            width: 340px;
+            height: 245px;
+            background: url(page7_pic5.png) -39px -421px no-repeat;
+            background-size: 425px;
+            transform: rotate(-3deg) scale(1.1);
+            opacity: 0;
+        }
+
+        .page7_img9 {
+            position: absolute;
+            left: 77px;
+            top: 55px;
+            width: 220px;
+            height: 100px;
+            background: url(page7_pic3.png) -75px -32px;
+            background-size: 375px;
+            opacity: 0;
+        }
+
+        .page7_img10 {
+            position: absolute;
+            left: 22px;
+            top: 126px;
+            width: 340px;
+            height: 245px;
+            background: url(page7_pic4.png) 2px -97px no-repeat;
+            background-size: cover;
+            transform: rotate(6deg) scale(1.2);
+            opacity: 0;
+        }
+
+        .page7_img11 {
+            position: absolute;
+            left: -22px;
+            top: 350px;
+            width: 340px;
+            height: 245px;
+            background: url(page7_pic6.png) -214px -667px no-repeat;
+            background-size: 600px;
+            transform: rotate(21deg) scale(1);
+            opacity: 0;
+        }
+
+        /*从底侧滑入淡入*/
+        .page7_img_running_bottom {
+            animation: page7_img1_running_bottom 0.7s ease;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page7_img1_running_bottom {
+            from {
+                opacity: 0;
+                transform: translate(0, 50px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(0, 0)
+            }
+        }
+
+        /*淡入淡出缩放*/
+        .page7_img_running_scale {
+            animation: page7_img_running_scale 2s ease;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page7_img_running_scale {
+            from {
+                opacity: 1;
+                transform: scale(0);
+            }
+            40% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+            80% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: scale(1.5);
+            }
+        }
+
+        /*从顶侧滑出淡出*/
+        .page7_img_running_top {
+            animation: page7_img_running_top 0.7s ease;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page7_img_running_top {
+            from {
+                opacity: 1;
+                transform: translate(0, 0);
+            }
+            to {
+                opacity: 0;
+                transform: translate(0, -50px)
+            }
+        }
+
+        /*淡入淡出缩放*/
+        .page7_img2_running_scale {
+            animation: page7_img2_running_scale 2s ease;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page7_img2_running_scale {
+            from {
+                opacity: 1;
+                transform: scale(0) rotate(-17deg);
+            }
+            40% {
+                opacity: 1;
+                transform: scale(1.1) rotate(-17deg);
+            }
+            80% {
+                opacity: 1;
+                transform: scale(1) rotate(-17deg);
+            }
+            to {
+                opacity: 0;
+                transform: scale(1.5) rotate(-17deg);
+            }
+        }
+
+        /*淡入淡出缩放*/
+        .page7_img7_running_scale {
+            animation: page7_img7_running_scale 2s ease;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page7_img7_running_scale {
+            from {
+                opacity: 1;
+                transform: scale(0) rotate(24deg);
+            }
+            40% {
+                opacity: 1;
+                transform: scale(1.1) rotate(24deg);
+            }
+            80% {
+                opacity: 1;
+                transform: scale(1) rotate(24deg);
+            }
+            to {
+                opacity: 0;
+                transform: scale(1.5) rotate(24deg);
+            }
+        }
+
+        /*淡入淡出缩放*/
+        .page7_img11_running_scale {
+            animation: page7_img11_running_scale 2s ease;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+        }
+
+        @keyframes page7_img11_running_scale {
+            from {
+                opacity: 1;
+                transform: scale(0) rotate(21deg);
+            }
+            40% {
+                opacity: 1;
+                transform: scale(1.1) rotate(21deg);
+            }
+            80% {
+                opacity: 1;
+                transform: scale(1) rotate(21deg);
+            }
+            to {
+                opacity: 0;
+                transform: scale(1.5) rotate(21deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page7">
+    <div class="page7_content">
+        <div class="page7_img1"></div>
+        <div class="page7_img2"></div>
+        <div class="page7_img3"></div>
+        <div class="page7_img4"></div>
+        <div class="page7_img5"></div>
+        <div class="page7_img6"></div>
+        <div class="page7_img7"></div>
+        <div class="page7_img8"></div>
+        <div class="page7_img9"></div>
+        <div class="page7_img10"></div>
+        <div class="page7_img11"></div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var t;
+        var $img_first = $(".page7_content>div:lt(3):gt(0)");
+        var $img_second = $(".page7_content>div:lt(5):gt(2)");
+        var $img_third = $(".page7_content>div:lt(8):gt(5)");
+        var $img_fourth = $(".page7_content>div:gt(8)");
+        $(".page7_img1").addClass("page7_img_running_bottom").css("opacity",1);
+        t = setInterval(img2_move,500);
+        function img2_move() {
+            if($(".page7_img1").css("opacity") / 1 == 1){
+                clearInterval(t);
+                $(".page7_img2").addClass("page7_img2_running_scale");
+                t = setTimeout(function () {
+                    clearTimeout(t);
+                    $(".page7_img3").addClass("page7_img_running_scale");
+                    t = setInterval(img4_move,2300)
+                },300)
+            }
+        }
+
+        function img4_move() {
+            if($(".page7_img3").css("opacity") / 1 == 0){
+                clearInterval(t);
+                for (var i = 0; i < 2; i++) {
+                    (function ($this, i) {
+                        setTimeout(function () {
+                            $this.addClass("page7_img_running_scale");
+                        }, i * 300)
+                    })($img_second.eq(i), i);
+                }
+                t = setInterval(img6_move,2500)
+            }
+        }
+
+        function img6_move() {
+            if($(".page7_img5").css("opacity") / 1 == 0){
+                clearInterval(t);
+                $(".page7_img1").addClass("page7_img_running_top").css("opacity",0);
+                $(".page7_img6").addClass("page7_img_running_bottom").css("opacity",1);
+                t = setTimeout(img7_move,800)
+            }
+        }
+
+        function img7_move() {
+            if($(".page7_img6").css("opacity") / 1 == 1){
+                clearTimeout(t);
+                $(".page7_img7").addClass("page7_img7_running_scale");
+                t = setTimeout(function () {
+                    clearTimeout(t);
+                    $(".page7_img8").addClass("page7_img_running_scale");
+                    t = setInterval(img9_move,2300)
+                },300)
+            }
+        }
+
+        function img9_move() {
+            if($(".page7_img8").css("opacity") / 1 == 0){
+                clearInterval(t);
+                $(".page7_img6").addClass("page7_img_running_top").css("opacity",0);
+                $(".page7_img9").addClass("page7_img_running_bottom").css("opacity",1);
+                t = setTimeout(img10_move,800)
+            }
+        }
+
+        function img10_move() {
+            if($(".page7_img9").css("opacity") / 1 == 1){
+                clearTimeout(t);
+                $(".page7_img10").addClass("page7_img_running_scale");
+                t = setTimeout(function () {
+                    clearTimeout(t);
+                    $(".page7_img11").addClass("page7_img11_running_scale");
+                },300)
+            }
+        }
+
+
+    })
+</script>
+</body>
+</html>
